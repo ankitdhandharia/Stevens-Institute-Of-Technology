@@ -34,6 +34,25 @@ public class BinaryNumber {
         return data.length;
     }
 
+    // Get digit by index
+    public int getDigit(int index) {
+        if (index >= data.length) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+        return data[index];
+    }
+
+    // Convert to decimal
+    public int toDecimal() {
+        int decimal = 0;
+        
+        // Binary to decimal
+        for (int i = 0; i < data.length; i++) {
+            decimal += data[i] * Math.pow(2, data.length - i - 1);
+        }
+        return decimal;
+    }
+
 }
 
-// Update: hw1: binary addition with carry + overflow flag
+// Update: hw1: toString + decimal conversion
