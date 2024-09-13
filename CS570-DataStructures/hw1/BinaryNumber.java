@@ -53,6 +53,18 @@ public class BinaryNumber {
         return decimal;
     }
 
+    // Shift right
+    public void shiftR(int amount) {
+        data = Arrays.copyOf(data, data.length + amount); // Resize
+        
+        // Shift digits
+        for (int i = data.length - 1; i >= amount; i--) {
+            data[i] = data[i - amount];
+        }
+        
+        Arrays.fill(data, 0, amount, 0); // Fill with 0s
+    }
+
 }
 
-// Update: hw1: toString + decimal conversion
+// Update: hw1: shiftLeft / shiftRight ops
