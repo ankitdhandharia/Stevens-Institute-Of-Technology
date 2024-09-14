@@ -65,6 +65,31 @@ public class BinaryNumber {
         Arrays.fill(data, 0, amount, 0); // Fill with 0s
     }
 
+    // Add two binary numbers
+    public void add(BinaryNumber other) {
+        if (data.length != other.getLength()) {
+            System.out.println("Lengths do not match");
+            return;
+        }
+
+        int[] otherData = other.getBinary(); // Get other data
+        int carry = 0;
+
+        // Binary addition
+        for (int i = data.length - 1; i >= 0; i--) {
+            int sum = carry + data[i] + otherData[i];
+            data[i] = sum % 2;
+            carry = sum / 2;
+        }
+        
+        overflow = (carry > 0); // Set overflow
+    }
+
+    // Get binary array
+    private int[] getBinary() {
+        return data;
+    }
+
 }
 
-// Update: hw1: shiftLeft / shiftRight ops
+// Update: hw1: invalid-input handling + edge cases
