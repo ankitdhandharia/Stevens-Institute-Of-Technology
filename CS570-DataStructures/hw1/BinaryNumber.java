@@ -90,6 +90,27 @@ public class BinaryNumber {
         return data;
     }
 
+    // Convert to string
+    @Override
+    public String toString() {
+        if (overflow) {
+            return "Overflow";
+        }
+        
+        StringBuilder sb = new StringBuilder(); // Build string
+        
+        // Append digits
+        for (int digit : data) {
+            sb.append(digit);
+        }
+        return sb.toString();
+    }
+
+    // Clear overflow
+    public void clearOverflow() {
+        overflow = false;
+    }
+
 }
 
-// Update: hw1: invalid-input handling + edge cases
+// Update: hw1: add UML class diagram
