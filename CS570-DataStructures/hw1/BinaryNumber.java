@@ -111,6 +111,20 @@ public class BinaryNumber {
         overflow = false;
     }
 
+    // Main test method
+    public static void main(String[] args) {
+        BinaryNumber bn1 = new BinaryNumber(7); // Binary number with length
+        BinaryNumber bn2 = new BinaryNumber("1111111"); // Binary number with string
+
+        System.out.println("Binary Number 1: " + bn1.toString());
+        System.out.println("Binary Number 2 length: " + bn2.getLength());
+        System.out.println("Binary Number 2 digit at index 3: " + bn2.getDigit(3));
+
+        bn1.add(bn2); // Add numbers
+        System.out.println("Result of Binary Number 1 + Binary Number 2: " + bn1.toString());
+        System.out.println("Binary Number 2 in decimal: " + bn2.toDecimal());
+    }
 }
 
-// Update: hw1: add UML class diagram
+
+// Update: hw1: final cleanup
