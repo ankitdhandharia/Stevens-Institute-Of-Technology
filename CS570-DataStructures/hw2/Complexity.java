@@ -26,6 +26,27 @@ public class Complexity {
         }
     }
 
+    // Method 2 : Complexity with O(n^3)
+    public static void method2(int n) {
+        int counter = 0;
+        
+        if (n < 0) {
+            System.out.println("\n---------------Method 2 invalid case---------------");
+            System.out.println("Please enter a non-negative number as the input");
+        } else {
+            System.out.println("\n---------------Method 2 O(n^3)---------------");
+            
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    for (int k = 0; k < n; k++) {
+                        counter++;
+                        System.out.println("Operation " + counter);
+                    }
+                }
+            }
+        }
+    }
+
 }
 
-// Update: hw2: algorithm 1 (nested-loop) implementation
+// Update: hw2: algorithm 2
