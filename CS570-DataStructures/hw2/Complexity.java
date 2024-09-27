@@ -83,6 +83,23 @@ public class Complexity {
         }
     }
 
+    // Method 5 : Complexity with O(log log(n))
+    public static void method5(int n) {
+        int counter = 0;
+        
+        if (n < 2) {
+            System.out.println("\n---------------Method 5 invalid case---------------");
+            System.out.println("Please enter a positive number greater than 1 as the input");
+        } else {
+            System.out.println("\n---------------Method 5 O(log log(n))---------------");
+            
+            for (double i = 2; i < n; i = i * i) {
+                counter++;
+                System.out.println("Operation " + counter);
+            }
+        }
+    }
+
 }
 
-// Update: hw2: algorithm 3
+// Update: hw2: timing harness + runtime measurements
