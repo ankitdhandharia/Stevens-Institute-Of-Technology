@@ -100,6 +100,25 @@ public class Complexity {
         }
     }
 
+    // Method 6 : Complexity with O(2^n)
+    public static void method6(int n) {
+        if (n < 0) {
+            System.out.println("\n---------------Method 6 invalid case---------------");
+            System.out.println("Please enter a non-negative number as the input");
+        } else {
+            System.out.println("\n---------------Method 6 O(2^n)---------------");
+            
+            int counter = 1;
+            for (int i = 1; i <= n; i++) {
+                counter *= 2;
+            }
+            
+            for (int i = 1; i <= counter; i++) {
+                System.out.println("Operation " + i);
+            }
+        }
+    }
+
 }
 
-// Update: hw2: timing harness + runtime measurements
+// Update: hw2: Big-O analysis write-up in comments
