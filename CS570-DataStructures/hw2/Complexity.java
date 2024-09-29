@@ -119,6 +119,26 @@ public class Complexity {
         }
     }
 
+    public static void main(String[] args) {
+        method1(3);
+        method1(-3);
+        
+        method2(2);
+        method2(-2);
+        
+        method3(30);
+        method3(-30);
+        
+        method4(4);
+        method4(-4);
+        
+        method5(256);
+        method5(-256);
+        
+        method6(4);
+        method6(-4);
+    }
 }
 
-// Update: hw2: Big-O analysis write-up in comments
+
+// Update: hw2: finalize
