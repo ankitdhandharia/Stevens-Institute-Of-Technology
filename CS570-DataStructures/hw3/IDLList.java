@@ -43,6 +43,49 @@ public class IDLList<E> {
         this.indices = new ArrayList<>();
     }
 
+    //Adding an element to the head of the list
+    public boolean add(E elem) {
+        Node<E> newNode = new Node<>(elem, null, head);
+        if (head != null) {
+            head.prev = newNode;
+        }
+        head = newNode;
+
+        if (size == 0) {
+            //If list was empty, both head and tail are the same
+            tail = head;  
+        }
+
+        indices.add(0, newNode);
+        size++;
+        return true;
+    }
+
+    //Adding an element at a specific index
+    public boolean add(int index, E elem) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        if (index == 0) {
+            return add(elem);
+        } else if (index == size) {
+            return append(elem);
+        } else {
+            Node<E> prevNode = indices.get(index - 1);
+            Node<E> nextNode = prevNode.next;
+            Node<E> newNode = new Node<>(elem, prevNode, nextNode);
+            prevNode.next = newNode;
+            if (nextNode != null) {
+                nextNode.prev = newNode;
+            }
+
+            indices.add(index, newNode); 
+            size++;
+            return true;
+        }
+    }
+
 }
 
-// Update: hw3: IDLList Node class + head/tail/size
+// Update: hw3: addFront + addBack
