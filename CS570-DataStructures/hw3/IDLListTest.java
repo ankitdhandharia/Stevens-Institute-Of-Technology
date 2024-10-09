@@ -42,4 +42,4 @@ Name : Ankit Dhandharia
 
 }
 
-// Update: hw3: addFront + addBack
+// Update: hw3: add(index) + get(index)

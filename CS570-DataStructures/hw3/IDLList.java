@@ -86,6 +86,31 @@ public class IDLList<E> {
         }
     }
 
+    //Appending an element to the tail of the list
+    public boolean append(E elem) {
+        Node<E> newNode = new Node<>(elem, tail, null);
+        if (tail != null) {
+            tail.next = newNode;
+        }
+        tail = newNode;
+
+        if (size == 0) {
+            head = tail;
+        }
+
+        indices.add(newNode); 
+        size++;
+        return true;
+    }
+
+    //Getting the element at a specific index
+    public E get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        return indices.get(index).data;
+    }
+
 }
 
-// Update: hw3: addFront + addBack
+// Update: hw3: add(index) + get(index)
