@@ -111,6 +111,22 @@ public class IDLList<E> {
         return indices.get(index).data;
     }
 
+    //Getting the head element
+    public E getHead() {
+        if (head == null) {
+            throw new IllegalStateException("List is empty");
+        }
+        return head.data;
+    }
+
+    //Getting the last (tail) element
+    public E getLast() {
+        if (tail == null) {
+            throw new IllegalStateException("List is empty");
+        }
+        return tail.data;
+    }
+
 }
 
-// Update: hw3: add(index) + get(index)
+// Update: hw3: remove / removeFront / removeBack
