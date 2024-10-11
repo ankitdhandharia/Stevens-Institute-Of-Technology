@@ -127,6 +127,30 @@ public class IDLList<E> {
         return tail.data;
     }
 
+    //Getting the size of the list
+    public int size() {
+        return size;
+    }
+
+    //Removing and returning the head element
+    public E remove() {
+        if (head == null) {
+            throw new IllegalStateException("List is empty");
+        }
+
+        Node<E> removedNode = head;
+        head = head.next;
+        if (head != null) {
+            head.prev = null;
+        } else {
+            tail = null;  //List is set now empty
+        }
+
+        indices.remove(0);
+        size--;
+        return removedNode.data;
+    }
+
 }
 
-// Update: hw3: remove / removeFront / removeBack
+// Update: hw3: IDLListTest JUnit cases
