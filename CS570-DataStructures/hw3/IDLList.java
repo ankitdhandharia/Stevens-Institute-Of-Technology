@@ -151,6 +151,49 @@ public class IDLList<E> {
         return removedNode.data;
     }
 
+    //Removing and returning the last (tail) element
+    public E removeLast() {
+        if (tail == null) {
+            throw new IllegalStateException("List is empty");
+        }
+
+        Node<E> removedNode = tail;
+        tail = tail.prev;
+        if (tail != null) {
+            tail.next = null;
+        } else {
+            head = null;
+        }
+
+        indices.remove(size - 1);
+        size--;
+        return removedNode.data;
+    }
+
+    //Removing and returning the element at a specific index
+    public E removeAt(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        Node<E> removedNode = indices.get(index);
+        if (removedNode.prev != null) {
+            removedNode.prev.next = removedNode.next;
+        } else {
+            head = removedNode.next;
+        }
+
+        if (removedNode.next != null) {
+            removedNode.next.prev = removedNode.prev;
+        } else {
+            tail = removedNode.prev;
+        }
+
+        indices.remove(index);
+        size--;
+        return removedNode.data;
+    }
+
 }
 
-// Update: hw3: IDLListTest JUnit cases
+// Update: hw3: UML diagram + edge-case fixes
