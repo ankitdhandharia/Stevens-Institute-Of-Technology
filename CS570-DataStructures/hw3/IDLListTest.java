@@ -39,7 +39,7 @@ Name : Ankit Dhandharia
          //Printing the last element
          System.out.println("Last element: " + myList.getLast());
      }
+ }
+ 
 
-}
-
-// Update: hw3: UML diagram + edge-case fixes
+// Update: hw3: submit

@@ -194,6 +194,29 @@ public class IDLList<E> {
         return removedNode.data;
     }
 
+    //Removing the first occurrence of a specific element
+    public boolean remove(E elem) {
+        for (int i = 0; i < size; i++) {
+            if (indices.get(i).data.equals(elem)) {
+                removeAt(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Providing a string representation of the list
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Node<E> current = head;
+        while (current != null) {
+            sb.append(current.data).append(" ");
+            current = current.next;
+        }
+        return sb.toString();
+    }
 }
 
-// Update: hw3: UML diagram + edge-case fixes
+
+// Update: hw3: submit
