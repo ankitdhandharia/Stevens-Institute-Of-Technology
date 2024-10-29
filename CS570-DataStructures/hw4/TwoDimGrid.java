@@ -27,7 +27,11 @@ public class TwoDimGrid extends JPanel implements GridColors {
     private static final int PREFERED_BUTTON_SIZE = 60;
     /** Default number of rows */
     private static final int DEFAULT_COLS = 20;
+    /** Default number of columns */
+    private static final int DEFAULT_ROWS = 20;
+    /** A two dimensional grid of buttons */
+    private JButton[][] theGrid;
 
 }
 
-// Update: hw4: PairInt + GridColors
+// Update: hw4: TwoDimGrid grid model
