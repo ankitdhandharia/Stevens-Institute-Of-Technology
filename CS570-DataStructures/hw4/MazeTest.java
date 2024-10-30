@@ -73,4 +73,4 @@ public class MazeTest extends JFrame implements GridColors {
 
 }
 
-// Update: hw4: TwoDimGrid grid model
+// Update: hw4: Maze DFS path search

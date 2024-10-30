@@ -21,4 +21,4 @@ public interface GridColors {
 }
 /*</exercise>*/
 
-// Update: hw4: TwoDimGrid grid model
+// Update: hw4: Maze DFS path search

@@ -31,7 +31,11 @@ public class TwoDimGrid extends JPanel implements GridColors {
     private static final int DEFAULT_ROWS = 20;
     /** A two dimensional grid of buttons */
     private JButton[][] theGrid;
+    /** Number of rows */
+    private int nRows;
+    /** Number of columns */
+    private int nCols;
 
 }
 
-// Update: hw4: TwoDimGrid grid model
+// Update: hw4: Maze DFS path search

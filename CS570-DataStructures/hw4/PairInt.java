@@ -17,6 +17,11 @@ public class PairInt {
         this.y = y;
     }
 
+    // Get x-coordinate
+    public int getX() {
+        return x;
+    }
+
 }
 
-// Update: hw4: TwoDimGrid grid model
+// Update: hw4: Maze DFS path search
