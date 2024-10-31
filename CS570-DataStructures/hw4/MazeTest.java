@@ -71,6 +71,38 @@ public class MazeTest extends JFrame implements GridColors {
         }
     }
 
+    // Builds the GUI
+    private MazeTest(TwoDimGrid aGrid) {
+        theGrid = aGrid;
+        getContentPane().add(aGrid, BorderLayout.CENTER);
+ //       Blob aBlob = new Blob(aGrid);
+        JTextArea instruct = new JTextArea(2, 20);
+        instruct.setText("Toggle a button to change its color"
+                + "\nPress SOLVE when ready");
+        getContentPane().add(instruct, BorderLayout.NORTH);
+        JButton solveButton = new JButton("SOLVE");
+        solveButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                solve();
+            }
+        });
+        JButton resetButton = new JButton("RESET");
+        resetButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                (new Maze(theGrid)).restore();
+            }
+        });
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.add(solveButton);
+        bottomPanel.add(resetButton);
+        getContentPane().add(bottomPanel, BorderLayout.SOUTH);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        pack();
+        setVisible(true);
+    }
+
 }
 
-// Update: hw4: Maze DFS path search
+// Update: hw4: backtracking + visited marking

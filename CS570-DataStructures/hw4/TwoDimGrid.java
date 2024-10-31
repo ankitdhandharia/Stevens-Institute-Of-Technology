@@ -36,6 +36,46 @@ public class TwoDimGrid extends JPanel implements GridColors {
     /** Number of columns */
     private int nCols;
 
+    // Constructors
+    /**
+     * Construct a TwoDimGrid of the specified size and of the
+     * specified colors
+     * @param nRows - Number of rows
+     * @param nCols - Number of columns
+     */
+    public TwoDimGrid(int nRows, int nCols) {
+        this.nRows = nRows;
+        this.nCols = nCols;
+        setPreferredSize(new Dimension(nCols * PREFERED_BUTTON_SIZE,
+                nRows * PREFERED_BUTTON_SIZE));
+        setLayout(new GridLayout(nRows, nCols));
+        theGrid = new JButton[nCols][];
+        for (int i = 0; i != nCols; ++i) {
+            theGrid[i] = new JButton[nRows];
+            for (int j = 0; j != nRows; ++j) {
+                theGrid[i][j] = new JButton(i + ", " + j);
+                theGrid[i][j].setOpaque(true);
+                theGrid[i][j].setBackground(BACKGROUND);
+                theGrid[i][j].addActionListener(new ToggleColor(theGrid[i][j]));
+            }
+        }
+
+        // Add the buttons to the button panel
+        for (int j = 0; j != nRows; ++j) {
+            for (int i = 0; i != nCols; ++i) {
+                add(theGrid[i][j]);
+            }
+        }
+    }
+
+    // Accessors and Mutators
+    /**
+     * Get the number of columns
+     * @return nCols */
+    public int getNCols() {
+        return nCols;
+    }
+
 }
 
-// Update: hw4: Maze DFS path search
+// Update: hw4: backtracking + visited marking

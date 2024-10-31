@@ -22,6 +22,16 @@ public class PairInt {
         return x;
     }
 
+    // Get y-coordinate
+    public int getY() {
+        return y;
+    }
+
+    // Set x-coordinate
+    public void setX(int x) {
+        this.x = x;
+    }
+
 }
 
-// Update: hw4: Maze DFS path search
+// Update: hw4: backtracking + visited marking

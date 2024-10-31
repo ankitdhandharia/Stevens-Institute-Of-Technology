@@ -51,6 +51,14 @@ public class Maze implements GridColors {
         return false;
     }
 
+    // Find all possible paths
+    public ArrayList<ArrayList<PairInt>> findAllMazePaths(int x, int y) {
+        ArrayList<ArrayList<PairInt>> result = new ArrayList<>(); // List of paths
+        Stack<PairInt> trace = new Stack<>(); // Current path stack
+        findMazePathStackBased(x, y, result, trace);
+        return result;
+    }
+
 }
 
-// Update: hw4: Maze DFS path search
+// Update: hw4: backtracking + visited marking
