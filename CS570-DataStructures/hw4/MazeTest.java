@@ -105,4 +105,4 @@ public class MazeTest extends JFrame implements GridColors {
 
 }
 
-// Update: hw4: backtracking + visited marking
+// Update: hw4: MazeTest cases

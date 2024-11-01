@@ -32,6 +32,11 @@ public class PairInt {
         this.x = x;
     }
 
+    // Set y-coordinate
+    public void setY(int y) {
+        this.y = y;
+    }
+
 }
 
-// Update: hw4: backtracking + visited marking
+// Update: hw4: MazeTest cases

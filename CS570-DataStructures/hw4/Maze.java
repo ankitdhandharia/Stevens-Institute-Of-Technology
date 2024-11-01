@@ -59,6 +59,45 @@ public class Maze implements GridColors {
         return result;
     }
 
+    // Helper method for all paths
+    private void findMazePathStackBased(int x, int y, ArrayList<ArrayList<PairInt>> result, Stack<PairInt> trace) {
+        // Outside grid or invalid path
+        if (x < 0 || y < 0 || x >= maze.getNCols() || y >= maze.getNRows() || !maze.getColor(x, y).equals(NON_BACKGROUND)) {
+            return;
+        }
+
+        trace.push(new PairInt(x, y)); // Add to path
+
+        // Check for exit cell
+        if (x == maze.getNCols() - 1 && y == maze.getNRows() - 1) {
+            result.add(new ArrayList<>(trace)); // Add path to result
+        } else {
+            maze.recolor(x, y, PATH); // Mark as path
+            // Recursive calls for neighbors
+            findMazePathStackBased(x + 1, y, result, trace);
+            findMazePathStackBased(x, y + 1, result, trace);
+            findMazePathStackBased(x - 1, y, result, trace);
+            findMazePathStackBased(x, y - 1, result, trace);
+            maze.recolor(x, y, NON_BACKGROUND); // Reset color
+        }
+
+        trace.pop(); // Remove from path
+    }
+
+    // Find shortest path in maze
+    public ArrayList<PairInt> findMazePathMin(int x, int y) {
+        ArrayList<ArrayList<PairInt>> allPaths = findAllMazePaths(x, y); // All paths list
+        ArrayList<PairInt> minPath = null; // Shortest path
+
+        // Compare path lengths
+        for (ArrayList<PairInt> path : allPaths) {
+            if (minPath == null || path.size() < minPath.size()) {
+                minPath = path;
+            }
+        }
+        return minPath != null ? minPath : new ArrayList<>();
+    }
+
 }
 
-// Update: hw4: backtracking + visited marking
+// Update: hw4: MazeTest cases

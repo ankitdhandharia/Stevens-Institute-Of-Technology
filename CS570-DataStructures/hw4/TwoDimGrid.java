@@ -76,6 +76,22 @@ public class TwoDimGrid extends JPanel implements GridColors {
         return nCols;
     }
 
+    /**
+     * Get the number of rows
+     * @return nRows */
+    public int getNRows() {
+        return nRows;
+    }
+
+    /**
+     * Get the color at a given coordinate
+     * @param x - The column number
+     * @param y - The row number
+     * @return The color at the given coordinate */
+    public Color getColor(int x, int y) {
+        return theGrid[x][y].getBackground();
+    }
+
 }
 
-// Update: hw4: backtracking + visited marking
+// Update: hw4: MazeTest cases
