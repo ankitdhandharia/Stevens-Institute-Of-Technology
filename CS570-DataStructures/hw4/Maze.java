@@ -98,6 +98,11 @@ public class Maze implements GridColors {
         return minPath != null ? minPath : new ArrayList<>();
     }
 
+    // Reset temporary cells to background
+    public void resetTemp() {
+        maze.recolor(TEMPORARY, BACKGROUND);
+    }
+
 }
 
-// Update: hw4: MazeTest cases
+// Update: hw4: UML + refactor

@@ -92,6 +92,33 @@ public class TwoDimGrid extends JPanel implements GridColors {
         return theGrid[x][y].getBackground();
     }
 
+    /**
+     * Change the color at a given coordinate
+     * @param x - The column number
+     * @param y - The row number
+     * @param newColor - The color to set the button to */
+    public void recolor(int x, int y, Color newColor) {
+        theGrid[x][y].setBackground(newColor);
+        repaint();
+    }
+
+    /**
+     * Set the color of each square in the grid that correspond
+     * to the elements of the given array with the value 1
+     * @param bitMap - An array of 0's and 1's the same size as the grid
+     * @param aColor - The color to be set
+     * @throws ArrayIndexOutOfBounds if the array size and the
+     *         grid size differ  */
+    public void recolor(char[][] bitMap, Color aColor) {
+        for (int i = 0; i != bitMap.length; ++i) {
+            for (int j = 0; j != bitMap[i].length; ++j) {
+                if (bitMap[i][j] == '1') {
+                    theGrid[j][i].setBackground(aColor);
+                }
+            }
+        }
+    }
+
 }
 
-// Update: hw4: MazeTest cases
+// Update: hw4: UML + refactor

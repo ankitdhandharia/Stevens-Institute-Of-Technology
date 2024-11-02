@@ -37,6 +37,21 @@ public class PairInt {
         this.y = y;
     }
 
+    // Check equality with another object
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true; // Same object
+        if (obj == null || getClass() != obj.getClass()) return false; // Null or different class
+        PairInt pair = (PairInt) obj;
+        return x == pair.x && y == pair.y; // Compare coordinates
+    }
+
+    // Convert coordinates to string
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
+
 }
 
-// Update: hw4: MazeTest cases
+// Update: hw4: UML + refactor

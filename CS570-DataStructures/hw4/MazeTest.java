@@ -103,6 +103,16 @@ public class MazeTest extends JFrame implements GridColors {
         setVisible(true);
     }
 
+    public void solve() {
+        Maze m = new Maze(theGrid);
+        boolean found = m.findMazePath();
+        if (found) {
+            JOptionPane.showMessageDialog(null, "Success - reset maze and try again");
+        } else {
+            JOptionPane.showMessageDialog(null, "No path - reset maze and try again");
+        }
+    }
+
 }
 
-// Update: hw4: MazeTest cases
+// Update: hw4: UML + refactor
