@@ -112,7 +112,7 @@ public class MazeTest extends JFrame implements GridColors {
             JOptionPane.showMessageDialog(null, "No path - reset maze and try again");
         }
     }
-
 }
 
-// Update: hw4: UML + refactor
+
+// Update: hw4: submit

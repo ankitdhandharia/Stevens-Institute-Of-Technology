@@ -21,4 +21,4 @@ public interface GridColors {
 }
 /*</exercise>*/
 
-// Update: hw4: UML + refactor
+// Update: hw4: submit

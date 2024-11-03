@@ -52,6 +52,11 @@ public class PairInt {
         return "(" + x + ", " + y + ")";
     }
 
+    // Create a copy of PairInt
+    public PairInt copy() {
+        return new PairInt(x, y);
+    }
 }
 
-// Update: hw4: UML + refactor
+
+// Update: hw4: submit

@@ -103,6 +103,13 @@ public class Maze implements GridColors {
         maze.recolor(TEMPORARY, BACKGROUND);
     }
 
+    // Restore maze to initial state
+    public void restore() {
+        resetTemp(); // Reset temporary cells
+        maze.recolor(PATH, BACKGROUND); // Reset path cells
+        maze.recolor(NON_BACKGROUND, BACKGROUND); // Reset other cells
+    }
 }
 
-// Update: hw4: UML + refactor
+
+// Update: hw4: submit

@@ -119,6 +119,56 @@ public class TwoDimGrid extends JPanel implements GridColors {
         }
     }
 
+    /*<exercise chapter="5" section="5" type="programming" number="2">*/
+    /**
+     * Recolor all cells that are a given tempColor
+     * @param tempColor color to be changed
+     * @param newColor the new color
+     */
+    public void recolor(Color tempColor, Color newColor) {
+        for (int i = 0; i != getNCols(); ++i) {
+            for (int j = 0; j != getNRows(); ++j) {
+                if (theGrid[i][j].getBackground().equals(tempColor)) {
+                    theGrid[i][j].setBackground(newColor);
+                }
+            }
+        }
+        repaint();
+    }
+    /*</exercise>*/
+
+    // Inner class
+    /** ActionListener class to toggle color when clicked */
+    private class ToggleColor
+            implements ActionListener {
+        // DataField
+
+        /** The button to be responded to */
+        private JButton me;
+
+        // Constructor
+        /**
+         * Construct ToggleColor object for a given button
+         * @param theButton - The button to be responded to
+         */
+        public ToggleColor(JButton theButton) {
+            me = theButton;
+        }
+
+        // Methods
+        /**
+         * Action in response to button push
+         * @param e - Event object is ignored
+         */
+        public void actionPerformed(ActionEvent e) {
+            if (me.getBackground().equals(BACKGROUND)) {
+                me.setBackground(NON_BACKGROUND);
+            } else {
+                me.setBackground(BACKGROUND);
+            }
+        }
+    }
 }
 
-// Update: hw4: UML + refactor
+
+// Update: hw4: submit
