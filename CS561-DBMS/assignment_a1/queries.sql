@@ -2,4 +2,7 @@
 CWID : 20033031
 
 
--- Update: a1: add schema.sql + sales-table prompts
+#1
+
+
+-- Update: a1: Q1 — min/max/avg quantity per customer
