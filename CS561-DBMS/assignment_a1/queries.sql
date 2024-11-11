@@ -17,4 +17,16 @@ on min_query.cust = max_query.cust
 #2
 
 
--- Update: a1: Q2 — busiest / slowest month per year
+with t1 as (select year, month, sum(quant) as total from sales group by year, month),
+t2 as (select year, min(total) as mintotal, max(total) as maxtotal from t1 group by year)
+select t1_min.year as "YEAR", t1_max.month as "BUSIEST_MONTH", t1_max.total as "BUSIEST_TOTAL_Q", t1_min.month as "SLOWEST_MONTH", t1_min.total as "SLOWEST_TOTAL_Q"
+from 
+(select year, month, total from t1) as t1_min
+inner join 
+(select year, mintotal, maxtotal from t2) t2 on t1_min.year = t2.year and t1_min.total = t2.mintotal
+inner join 
+(select year, month, total from t1) as t1_max on t1_max.year = t2.year and t1_max.total = t2.maxtotal
+order by t1_min.year
+
+
+-- Update: a1: Q3 — most / least favourite month per product
