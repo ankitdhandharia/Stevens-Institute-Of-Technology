@@ -58,6 +58,17 @@ public class Treap<E extends Comparable<E>> {
         this.root = null;
     }
 
+    // Constructor to initialize the Treap with a seeded random priority generator
+    public Treap(long seed) {
+        this.priorityGenerator = new Random(seed);
+        this.root = null;
+    }
+
+    // Adds a key to the Treap with a randomly generated priority
+    public boolean add(E key) {
+        return add(key, priorityGenerator.nextInt());
+    }
+
 }
 
-// Update: hw5: Treap Node + rotations
+// Update: hw5: insert with priority heapify
