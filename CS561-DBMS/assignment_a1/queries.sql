@@ -29,4 +29,7 @@ inner join
 order by t1_min.year
 
 
--- Update: a1: Q3 — most / least favourite month per product
+#3
+
+
+-- Update: a1: Q4
