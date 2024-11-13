@@ -69,6 +69,69 @@ public class Treap<E extends Comparable<E>> {
         return add(key, priorityGenerator.nextInt());
     }
 
+    // Adds a key with a specific priority to the Treap
+    public boolean add(E key, int priority) {
+        if (root == null) {
+            root = new Node<>(key, priority);
+            return true;
+        }
+
+        Node<E> newNode = new Node<>(key, priority);
+        Node<E> current = root;
+        Stack<Node<E>> stack = new Stack<>();
+
+        while (current != null) {
+            if (current.data.compareTo(key) == 0) {
+                return false; // Duplicate key, do nothing
+            }
+
+            stack.push(current);
+            if (key.compareTo(current.data) < 0) {
+                if (current.left == null) {
+                    current.left = newNode;
+                    reheap(newNode, stack);
+                    return true;
+                }
+                current = current.left;
+            } else {
+                if (current.right == null) {
+                    current.right = newNode;
+                    reheap(newNode, stack);
+                    return true;
+                }
+                current = current.right;
+            }
+        }
+        return false;
+    }
+
+    // Restores the heap property after inserting a node
+    private void reheap(Node<E> node, Stack<Node<E>> stack) {
+        while (!stack.isEmpty()) {
+            Node<E> parent = stack.pop();
+            if (parent.priority < node.priority) {
+                if (parent.data.compareTo(node.data) > 0) {
+                    node = parent.rotateRight();
+                } else {
+                    node = parent.rotateLeft();
+                }
+
+                if (!stack.isEmpty()) {
+                    Node<E> grandparent = stack.peek();
+                    if (grandparent.left == parent) {
+                        grandparent.left = node;
+                    } else {
+                        grandparent.right = node;
+                    }
+                } else {
+                    root = node;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
 }
 
-// Update: hw5: insert with priority heapify
+// Update: hw5: delete
