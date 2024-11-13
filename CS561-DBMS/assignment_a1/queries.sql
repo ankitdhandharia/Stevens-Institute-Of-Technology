@@ -32,4 +32,17 @@ order by t1_min.year
 #3
 
 
--- Update: a1: Q4
+with t1 as (select2.maxquant, s1.date, t3.maxquant, s2.date, t4.maxquant, s3.date, t5.maxquantelect prod, max(total) as maxtotal, min(total) as mintotal from t1 group by prod)
+select t1_min.prod as "PRODUCT", t1_max.month as "MOST_FAV_MO", t1_min.month as "LEAST_FAV_MO"
+from 
+(select prod, month, total from t1) as t1_min
+inner join 
+(select prod, mintotal, maxtotal from t2) t2 on t1_min.prod = t2.prod and t1_min.total = t2.mintotal
+inner join 
+(select prod, month, total from t1) as t1_max on t1_max.prod = t2.prod and t1_max.total = t2.maxtotal
+
+
+#4
+
+
+-- Update: a1: Q5
