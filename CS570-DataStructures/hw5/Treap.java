@@ -132,6 +132,43 @@ public class Treap<E extends Comparable<E>> {
         }
     }
 
+    // Deletes a key from the Treap, returns true if successful, false otherwise
+    public boolean delete(E key) {
+        if (key == null || !find(key)) {
+            return false;
+        }
+        root = delete(root, key);
+        return true;
+    }
+
+    // Helper function to recursively delete a node
+    private Node<E> delete(Node<E> current, E key) {
+        if (current == null) {
+            return null;
+        }
+
+        if (key.compareTo(current.data) < 0) {
+            current.left = delete(current.left, key);
+        } else if (key.compareTo(current.data) > 0) {
+            current.right = delete(current.right, key);
+        } else {
+            if (current.left == null) {
+                return current.right;
+            } else if (current.right == null) {
+                return current.left;
+            } else {
+                if (current.left.priority > current.right.priority) {
+                    current = current.rotateRight();
+                    current.right = delete(current.right, key);
+                } else {
+                    current = current.rotateLeft();
+                    current.left = delete(current.left, key);
+                }
+            }
+        }
+        return current;
+    }
+
 }
 
-// Update: hw5: delete
+// Update: hw5: search + inorder traversal
