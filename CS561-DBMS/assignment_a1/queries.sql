@@ -45,4 +45,22 @@ inner join
 #4
 
 
--- Update: a1: Q5
+with t1 as (select cust, prod, avg(quant) as avg_q, sum(quant) as total_q, count(*) as count_q from sales group by cust, prod),
+t2 as (select cust, prod, avg(quant) as spring from sales where month in (3, 4, 5) group by cust, prod),
+t3 as (select cust, prod, avg(quant) as summer from sales where month in (6, 7, 8) group by cust, prod),
+t4 as (select cust, prod, avg(quant) as fall from sales where month in (9, 10, 11) group by cust, prod),
+t5 as (select cust, prod, avg(quant) as winter from sales where month in (12, 1, 2) group by cust, prod)
+select t1.cust as "CUSTOMER", t1.prod as "PRODUCT", t2.spring as "SPRING_AVG", t3.summer as "SUMMER_AVG", t4.fall as "FALL_AVG", t5.winter as "WINTER_AVG", t1.avg_q as "AVERAGE", t1.total_q as "TOTAL", t1.count_q as "COUNT"
+from 
+(select cust, prod, avg_q, total_q, count_q from t1) as t1
+inner join 
+(select cust, prod, spring from t2) t2 on t1.cust = t2.cust and t1.prod = t2.prod
+inner join 
+(select cust, prod, summer from t3) t3 on t1.cust = t3.cust and t1.prod = t3.prod
+inner join 
+(select cust, prod, fall from t4) t4 on t1.cust = t4.cust and t1.prod = t4.prod
+inner join 
+(select cust, prod, winter from t5) t5 on t1.cust = t5.cust and t1.prod = t5.prod
+
+
+-- Update: a1: format + verify all 5 queries
