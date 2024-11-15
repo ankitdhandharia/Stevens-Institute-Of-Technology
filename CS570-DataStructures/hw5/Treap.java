@@ -169,6 +169,29 @@ public class Treap<E extends Comparable<E>> {
         return current;
     }
 
+    // Finds if a key exists in the Treap
+    public boolean find(E key) {
+        if (key == null) {
+            throw new IllegalArgumentException("Key cannot be null.");
+        }
+        return find(root, key);
+    }
+
+    // Helper function for recursive search
+    private boolean find(Node<E> current, E key) {
+        if (current == null) {
+            return false;
+        }
+
+        if (key.compareTo(current.data) == 0) {
+            return true;
+        }
+
+        return key.compareTo(current.data) < 0
+                ? find(current.left, key)
+                : find(current.right, key);
+    }
+
 }
 
-// Update: hw5: search + inorder traversal
+// Update: hw5: JUnit tests
