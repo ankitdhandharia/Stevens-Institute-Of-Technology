@@ -63,4 +63,34 @@ inner join
 (select cust, prod, winter from t5) t5 on t1.cust = t5.cust and t1.prod = t5.prod
 
 
--- Update: a1: format + verify all 5 queries
+#5
+
+
+with t1 as (select prod, date, sum(quant) as total from sales group by prod, date),
+t2 as (select t1.prod, max(total) as maxquant from t1 join sales as s on s.prod = t1.prod and s.date = t1.date where month in (1, 2, 3) group by t1.prod),
+t3 as (select t1.prod, max(total) as maxquant from t1 join sales as s on s.prod = t1.prod and s.date = t1.date where month in (4, 5, 6) group by t1.prod),
+t4 as (select t1.prod, max(total) as maxquant from t1 join sales as s on s.prod = t1.prod and s.date = t1.date where month in (7, 8, 9) group by t1.prod),
+t5 as (select t1.prod, max(total) as maxquant from t1 join sales as s on s.prod = t1.prod and s.date = t1.date where month in (10, 11, 12) group by t1.prod)
+select t1.prod as "PRODUCT", t2.maxquant as "Q1_MAX", s1.date as "Q1_DATE", t3.maxquant as "Q2_MAX", s2.date as "Q2_DATE", t4.maxquant as "Q3_MAX", s3.date as "Q3_DATE", t5.maxquant as "Q4_MAX", s4.date as "Q4_DATE"
+from 
+(select prod, date, total from t1) as t1
+inner join 
+(select prod, maxquant from t2) t2 on t1.prod = t2.prod
+inner join 
+(select prod, date, total from t1) as s1 on s1.prod = t2.prod and s1.total = t2.maxquant
+inner join 
+(select prod, maxquant from t3) t3 on t1.prod = t3.prod
+inner join 
+(select prod, date, total from t1) as s2 on s2.prod = t3.prod and s2.total = t3.maxquant
+inner join 
+(select prod, maxquant from t4) t4 on t1.prod = t4.prod
+inner join 
+(select prod, date, total from t1) as s3 on s3.prod = t4.prod and s3.total = t4.maxquant
+inner join 
+(select prod, maxquant from t5) t5 on t1.prod = t5.prod
+inner join 
+(select prod, date, total from t1) as s4 on s4.prod = t5.prod and s4.total = t5.maxquant
+group by t1.prod, t2.maxquant, s1.date, t3.maxquant, s2.date, t4.maxquant, s3.date, t5.maxquant, s4.date
+
+
+-- Update: a1: submit
