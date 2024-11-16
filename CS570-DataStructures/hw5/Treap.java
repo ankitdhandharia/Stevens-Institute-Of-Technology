@@ -192,6 +192,27 @@ public class Treap<E extends Comparable<E>> {
                 : find(current.right, key);
     }
 
+    // Prints the Treap as a string with preorder traversal
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        preOrderTraverse(root, 1, sb);
+        return sb.toString();
+    }
+
+    // Helper function for preorder traversal
+    private void preOrderTraverse(Node<E> node, int depth, StringBuilder sb) {
+        for (int i = 1; i < depth; i++) {
+            sb.append("  ");
+        }
+        if (node == null) {
+            sb.append("null\n");
+        } else {
+            sb.append(node.toString()).append("\n");
+            preOrderTraverse(node.left, depth + 1, sb);
+            preOrderTraverse(node.right, depth + 1, sb);
+        }
+    }
+
 }
 
-// Update: hw5: JUnit tests
+// Update: hw5: balance checks + cleanup
