@@ -213,6 +213,32 @@ public class Treap<E extends Comparable<E>> {
         }
     }
 
+    // Main method to test the Treap
+    public static void main(String[] args) {
+        Treap<Integer> treap = new Treap<>();
+
+        // Adding nodes
+        treap.add(4, 19);
+        treap.add(2, 31);
+        treap.add(6, 70);
+        treap.add(1, 84);
+        treap.add(3, 12);
+        treap.add(5, 83);
+        treap.add(7, 26);
+
+        System.out.println("Treap after insertion:");
+        System.out.println(treap);
+
+        // Testing deletion
+        System.out.println("Deleting 2: " + treap.delete(2));
+
+        // Testing search
+        System.out.println("Finding 3: " + treap.find(3));
+
+        // Final Treap structure
+        System.out.println("Treap after deletion:");
+        System.out.println(treap);
+    }
 }
 
-// Update: hw5: balance checks + cleanup
+// Update: hw5: submit
