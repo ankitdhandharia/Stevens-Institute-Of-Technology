@@ -19,7 +19,16 @@ public class Anagrams {
     
     // Maps letters to prime numbers
     Map<Character, Integer> letterTable;
+    
+    // Stores words by their hash codes
+    Map<Long, ArrayList<String>> anagramTable;
+
+    // Initialize tables
+    public Anagrams() {
+        buildLetterTable();
+        anagramTable = new HashMap<>();
+    }
 
 }
 
-// Update: hw6: dictionary read + signature map
+// Update: hw6: group anagrams by signature
