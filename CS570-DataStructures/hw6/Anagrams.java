@@ -29,6 +29,22 @@ public class Anagrams {
         anagramTable = new HashMap<>();
     }
 
+    // Create letter to prime number mapping
+    private void buildLetterTable() {
+        letterTable = new HashMap<>();
+        char[] alphabets = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        for (int i = 0; i < alphabets.length; i++) {
+            letterTable.put(alphabets[i], primes[i]);
+        }
+    }
+
+    // Add word to anagram table
+    private void addWord(String s) {
+        if (s == null || s.isEmpty()) return;
+        long hash = myHashCode(s);
+        anagramTable.computeIfAbsent(hash, k -> new ArrayList<>()).add(s);
+    }
+
 }
 
-// Update: hw6: group anagrams by signature
+// Update: hw6: MostAnagrams query
