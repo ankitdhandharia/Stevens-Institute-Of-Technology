@@ -45,6 +45,29 @@ public class Anagrams {
         anagramTable.computeIfAbsent(hash, k -> new ArrayList<>()).add(s);
     }
 
+    // Generate hash code for word using prime numbers
+    private Long myHashCode(String s) {
+        if (s == null || s.isEmpty()) {
+            throw new IllegalArgumentException("Invalid input word");
+        }
+        long key = 1;
+        for (char c : s.toCharArray()) {
+            key *= letterTable.get(c);
+        }
+        return key;
+    }
+
+    // Read words from file into anagram table
+    private void processFile(String filename) throws IOException {
+        try (FileInputStream fStream = new FileInputStream(filename);
+             BufferedReader br = new BufferedReader(new InputStreamReader(fStream))) {
+            String strLine;
+            while ((strLine = br.readLine()) != null) {
+                this.addWord(strLine);
+            }
+        }
+    }
+
 }
 
-// Update: hw6: MostAnagrams query
+// Update: hw6: JUnit tests
