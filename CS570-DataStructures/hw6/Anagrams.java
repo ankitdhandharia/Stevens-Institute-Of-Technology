@@ -68,6 +68,51 @@ public class Anagrams {
         }
     }
 
+    // Find entries with most anagrams
+    private ArrayList<Map.Entry<Long, ArrayList<String>>> getMaxEntries() {
+        ArrayList<Map.Entry<Long, ArrayList<String>>> maxEntries = new ArrayList<>();
+        int max = 0;
+        for (Map.Entry<Long, ArrayList<String>> entry : anagramTable.entrySet()) {
+            int size = entry.getValue().size();
+            if (size > max) {
+                maxEntries.clear();
+                maxEntries.add(entry);
+                max = size;
+            } else if (size == max) {
+                maxEntries.add(entry);
+            }
+        }
+        return maxEntries;
+    }
+
+    // Process dictionary and display results
+    public static void main(String[] args) {
+        Anagrams a = new Anagrams();
+        final long startTime = System.nanoTime();
+        
+        try {
+            a.processFile("words_alpha.txt");
+        } catch (IOException e1) {
+            System.out.println("Error processing file: " + e1.getMessage());
+            return;
+        }
+
+        ArrayList<Map.Entry<Long, ArrayList<String>>> maxEntries = a.getMaxEntries();
+        if (maxEntries.isEmpty()) {
+            System.out.println("No anagrams found.");
+            return;
+        }
+
+        long key = maxEntries.get(0).getKey();
+        int length = maxEntries.get(0).getValue().size();
+        final long estimatedTime = System.nanoTime() - startTime;
+        final double seconds = ((double) estimatedTime / 1_000_000_000);
+        
+        System.out.println("Elapsed Time: " + seconds);
+        System.out.println("Key of maximum anagrams: " + key);
+        System.out.println("List of max anagrams: " + maxEntries.get(0).getValue());
+        System.out.println("Length of list of max anagrams: " + length);
+    }
 }
 
-// Update: hw6: JUnit tests
+// Update: hw6: UML + submit
