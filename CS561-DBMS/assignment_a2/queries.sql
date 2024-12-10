@@ -16,4 +16,15 @@ left join transaction t on m.cust = t.cust and m.prod = t.prod and m.month = t.m
 order by m.cust, m.prod, m.month
 
 
--- Update: a2: Q2 — before / during / after moving-window averages
+#2
+
+with current_month as (select cust, prod, month, avg(quant) as during_avg from sales group by cust, prod, month), 
+before_month as (select cust, prod, month + 1 as month, avg(quant) as before_avg from sales group by cust, prod, month), 
+after_month as (select cust, prod, month - 1 as month, avg(quant) as after_avg from sales group by cust, prod, month), 
+averages as (select c.cust, c.prod, c.month, b.before_avg, c.during_avg, a.after_avg from current_month c 
+left join before_month b on c.cust = b.cust and c.prod = b.prod and c.month = b.month 
+left join after_month a on c.cust = a.cust and c.prod = a.prod and c.month = a.month) 
+select cust as "CUSTOMER", prod as "PRODUCT", month as "MONTH", before_avg as "BEFORE_AVG", during_avg as "DURING_AVG", after_avg as "AFTER_AVG" from averages order by cust, prod, month
+
+
+-- Update: a2: Q3 — cross cust / prod / state averages
