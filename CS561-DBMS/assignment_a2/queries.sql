@@ -27,4 +27,17 @@ left join after_month a on c.cust = a.cust and c.prod = a.prod and c.month = a.m
 select cust as "CUSTOMER", prod as "PRODUCT", month as "MONTH", before_avg as "BEFORE_AVG", during_avg as "DURING_AVG", after_avg as "AFTER_AVG" from averages order by cust, prod, month
 
 
--- Update: a2: Q3 — cross cust / prod / state averages
+#3
+
+with base_avg as (select cust, prod, state, avg(quant) as prod_avg from sales group by cust, prod, state), 
+a1 as (select b.cust, b.prod, b.state, avg(s.quant) as other_cust_avg from base_avg b join sales s on b.prod = s.prod and b.state = s.state and b.cust != s.cust group by b.cust, b.prod, b.state), 
+a2 as (select b.cust, b.prod, b.state, avg(s.quant) as other_prod_avg from base_avg b join sales s on b.cust = s.cust and b.state = s.state and b.prod != s.prod group by b.cust, b.prod, b.state), 
+a3 as (select b.cust, b.prod, b.state, avg(s.quant) as other_state_avg from base_avg b join sales s on b.cust = s.cust and b.prod = s.prod and b.state != s.state group by b.cust, b.prod, b.state) 
+select b.cust as "CUSTOMER", b.prod as "PRODUCT", b.state as "STATE", b.prod_avg as "PROD_AVG", a1.other_cust_avg as "OTHER_CUST_AVG", a2.other_prod_avg as "OTHER_PROD_AVG", a3.other_state_avg as "OTHER_STATE_AVG" from base_avg b, a1, a2, a3 
+where b.cust = a1.cust and b.prod = a1.prod and b.state = a1.state 
+and b.cust = a2.cust and b.prod = a2.prod and b.state = a2.state 
+and b.cust = a3.cust and b.prod = a3.prod and b.state = a3.state 
+order by b.cust, b.prod, b.state
+
+
+-- Update: a2: Q4
