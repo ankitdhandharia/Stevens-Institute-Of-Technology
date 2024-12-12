@@ -40,4 +40,17 @@ and b.cust = a3.cust and b.prod = a3.prod and b.state = a3.state
 order by b.cust, b.prod, b.state
 
 
--- Update: a2: Q4
+#4
+
+with first_max as (select s.cust, max(s.quant) as max_quant from sales s where s.state = 'NJ' group by s.cust), 
+second_max as (select s.cust, max(s.quant) as second_max_quant from sales s join first_max fm on s.cust = fm.cust where s.state = 'NJ' and s.quant < fm.max_quant group by s.cust), 
+thrid_max as (select s.cust, max(s.quant) as third_max_quant from sales s join first_max fm on s.cust = fm.cust join second_max sm on s.cust = sm.cust where s.state = 'NJ' and s.quant < fm.max_quant and s.quant < sm.second_max_quant group by s.cust), 
+top_sales as (select s.cust, s.quant, s.prod, s.date from sales s join first_max fm on s.cust = fm.cust and s.quant = fm.max_quant where s.state = 'NJ' 
+union
+select s.cust, s.quant, s.prod, s.date from sales s join second_max sm on s.cust = sm.cust and s.quant = sm.second_max_quant where s.state = 'NJ' 
+union
+select s.cust, s.quant, s.prod, s.date from sales s join thrid_max tm on s.cust = tm.cust and s.quant = tm.third_max_quant where s.state = 'NJ') 
+select cust as "CUSTOMER", quant as "QUANTITY", prod as "PRODUCT", date as "DATE" from top_sales order by "CUSTOMER", "DATE"
+
+
+-- Update: a2: Q5
