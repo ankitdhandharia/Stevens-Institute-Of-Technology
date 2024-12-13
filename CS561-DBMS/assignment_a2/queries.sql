@@ -53,4 +53,13 @@ select s.cust, s.quant, s.prod, s.date from sales s join thrid_max tm on s.cust 
 select cust as "CUSTOMER", quant as "QUANTITY", prod as "PRODUCT", date as "DATE" from top_sales order by "CUSTOMER", "DATE"
 
 
--- Update: a2: Q5
+#5
+
+with base as (select distinct prod, quant from sales order by prod, quant), 
+pos as (select b.prod, b.quant, count(s.quant) as pos from base b, sales s where s.prod = b.prod and s.quant <= b.quant group by b.prod, b.quant), 
+med_pos as (select prod, ceiling(count(quant) / 2) as median_pos from sales group by prod), 
+meds as (select p.prod, p.quant, p.pos from pos p, med_pos mp where p.prod = mp.prod and p.pos >= mp.median_pos)
+select prod as "PRODUCT", min(quant) as "MEDIAN QUANT" from meds group by prod order by prod
+
+
+-- Update: a2: review + submit
